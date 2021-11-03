@@ -12,6 +12,11 @@ namespace Homework
 
         static public double ElevateNum (double fNum, double sNum)
         {
+            if(fNum<0 || sNum<0)
+            {
+                throw new ArgumentException();
+            }
+
             double result = 1;
             for (int i = 0; i < sNum; i++)
             {
@@ -20,11 +25,17 @@ namespace Homework
             return result;
         }
 
-
         //2. Пользователь вводит 1 число (A). Вывести все числа от 1 до 1000, которые делятся на A.
 
         static public int[] GetNumbersDivisionOnNum(int num)
         {
+            num = Math.Abs(num);
+
+            if (num<-1000 || num>1000)
+            {
+                throw new ArgumentException();
+            }
+
             int[] result = new int[1000 / num];
 
             for(int i=num; i<=1000; i+=num)
@@ -52,18 +63,23 @@ namespace Homework
 
         public static int GetBiggestDivider(int num)
         {
-
             int divider = 0;
-
-            for (int i = num - 1; i > 0; i--)
+            if(num>0)
             {
-                divider = num % i;
-                if (divider == 0)
+                for (int i = num - 1; i > 0; i--)
                 {
-                    divider = i;
-                    break;
+                    divider = num % i;
+                    if (divider == 0)
+                    {
+                        divider = i;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                divider = Math.Abs(num);
+            } 
                    return divider;
         }
 
@@ -95,6 +111,11 @@ namespace Homework
 
         public static int GetFibonacciNumber(int num)
         {
+            if(num<0 || num==0)
+            {
+                throw new ArgumentException();
+            }
+
             int fNum = 0;
             int sNum = 1;
             int tmp=0;
@@ -113,7 +134,19 @@ namespace Homework
 
         public static int GetBiggestDivOfTwoNumbersWithEuclidAlg(int fNum, int sNum)
         {
-
+            fNum = Math.Abs(fNum);
+            sNum = Math.Abs(sNum);
+            if(fNum==0 || sNum==0)
+            { 
+                if(fNum==0)
+                {
+                    return sNum;
+                }
+                else
+                {
+                    return fNum;
+                }
+            }
             while (fNum != sNum)
             {
                 if (fNum > sNum)
@@ -131,11 +164,11 @@ namespace Homework
         //8. Пользователь вводит целое положительное число, которое является кубом целого числа N.
         //Найдите число N методом половинного деления.
 
-        public static int GetNumByHalfDivMethod(int num)
+        public static double GetNumByHalfDivMethod(double num)
         {
-            int lBorder = 0;
-            int rBorder=num;
-            int half = 0;
+            double lBorder = 0;
+            double rBorder=num;
+            double half = 0;
             while (num != half * half * half)
             {
                 half = (lBorder + rBorder) / 2;
@@ -157,6 +190,7 @@ namespace Homework
 
         public static int CountOddDigit(int num)
         {
+            num = Math.Abs(num);
             int count = 0;
             while (num != 0)
             {
@@ -219,7 +253,8 @@ namespace Homework
         public static int GetSummOfEvenDigit(int num)
         {
             int result = 0;
-            
+            num = Math.Abs(num);
+
             while(num!=0)
             {
                 int tmp = num%10;
@@ -237,6 +272,7 @@ namespace Homework
         public static int GetSummOfOddDigit(int num)
         {
             int result = 0;
+            num = Math.Abs(num);
 
             while (num != 0)
             {
@@ -257,7 +293,14 @@ namespace Homework
         public static bool IsSameDigits(int fNum, int sNum)
         {
             bool result = false;
-            
+            fNum = Math.Abs(fNum);
+            sNum = Math.Abs(sNum);
+
+            if(fNum==0 && sNum==0)
+            {
+                result = true;
+            }
+
             while (fNum != 0)
             {
                 int tmp = sNum;

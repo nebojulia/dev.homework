@@ -70,6 +70,10 @@ namespace Homework
             double result1 = ((-b + Math.Sqrt(D)) / (2 * a));
             double result2 = ((-b - Math.Sqrt(D)) / (2 * a));
             {
+                if(a==0)
+                {
+                    throw new DivideByZeroException();
+                }
 
                 if (D > 0)
                 {
@@ -94,6 +98,11 @@ namespace Homework
 
         static public string WriteNumbersAsWords(int num)
         {
+            if(num>99 || num<10)
+            {
+                throw new ArgumentException();
+            }
+
             int dividedNum = num / 10;
             int remainderOfDiv = num % 10;
             int x = num;
