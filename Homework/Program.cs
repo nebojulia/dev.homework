@@ -13,9 +13,9 @@ namespace Homework
             //    Console.Write("{0} ", x[i]); 
             //}
             //
-            //Console.WriteLine();
-            //int a = Cycles.GetBiggestDivider(17);
-            //Console.WriteLine(a);
+            Console.WriteLine();
+            int a = Cycles.GetBiggestDivider(-20);
+            Console.WriteLine(a);
 
             //string x = "haha";
             //string y = "hoho";
@@ -86,6 +86,8 @@ namespace Homework
            //Console.WriteLine();
            //int[,] y = TwoDimensionalArray.TranspanentArray(x);
            //Service.PrintTwoDimensionalArray(y);
+
+
         }
     }
 }

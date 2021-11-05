@@ -57,7 +57,13 @@ namespace Homework
 
         //3. Пользователь вводит 3 числа (A, B и С). Выведите их в консоль в порядке возрастания.
 
+        public static int[] SortNumbersAscending(int fNum, int sNum, int tNum)
+        {
+            int [] num = new int[] { fNum, sNum, tNum };
+            Array.SortArrayAscending(num);
 
+            return num;
+        }
 
 
 
@@ -67,8 +73,6 @@ namespace Homework
         {
 
             double D = (b * b) - (4 * a * c);
-            double result1 = ((-b + Math.Sqrt(D)) / (2 * a));
-            double result2 = ((-b - Math.Sqrt(D)) / (2 * a));
             {
                 if(a==0)
                 {
@@ -77,6 +81,9 @@ namespace Homework
 
                 if (D > 0)
                 {
+                    double result1 = ((-b + Math.Sqrt(D)) / (2 * a));
+                    double result2 = ((-b - Math.Sqrt(D)) / (2 * a));
+
                     double[] result = new double[] {result1, result2};
                     return result;
                 }
@@ -87,6 +94,7 @@ namespace Homework
                 }      
                 else
                 {
+                    double result1 = ((-b + Math.Sqrt(D)) / (2 * a));
                     double[] result = new double[] { result1 };
                     return result;
                 }

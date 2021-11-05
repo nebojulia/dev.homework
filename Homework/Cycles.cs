@@ -63,7 +63,7 @@ namespace Homework
 
         public static int GetBiggestDivider(int num)
         {
-            int divider = 0;
+            int divider = num;
             if(num>0)
             {
                 for (int i = num - 1; i > 0; i--)
@@ -75,12 +75,13 @@ namespace Homework
                         break;
                     }
                 }
+                    return divider;
             }
             else
             {
                 divider = Math.Abs(num);
-            } 
-                   return divider;
+            }
+            return divider;
         }
 
 

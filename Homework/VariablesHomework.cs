@@ -20,7 +20,7 @@ namespace Homework
             return result;   
         }
 
-        //2. Пользователь вводит 2 строковых значения(A и B). Поменяйте содержимое переменных A и B местами.
+        //2. Пользователь вводит 2 строковых значения(A и B). Поменяйте содержимое переменных A и B местами. (для ссылок)
 
         public static void Swap <T>(ref T a, ref T b)
         {
@@ -29,6 +29,14 @@ namespace Homework
             b = tmp;
         }
 
+        //2.1. Пользователь вводит 2 строковых значения(A и B). Поменяйте содержимое переменных A и B местами.
+
+        public static void SwapStrings(string a, string b)
+        {
+            string tmp = a;
+            a = b;
+            b = tmp;
+        }
 
         //3.1 Пользователь вводит 2 числа (A и B). Выведите в консоль результат деления A на B.
         public static int GetResultOfDivision(int firstNum, int secondNum)

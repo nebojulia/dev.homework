@@ -12,6 +12,10 @@ namespace Homework
 
         public static int SearchMin(int[] array)
         {
+            if(array.Length==0)
+            {
+                throw new ArgumentException();
+            }
             int min = array[0];
             for (int i = 1; i < array.Length; i++)
             {
@@ -27,6 +31,10 @@ namespace Homework
 
         public static int SearchMax(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
             int max = array[0];
             for (int i = 1; i < array.Length; i++)
             {
@@ -42,6 +50,11 @@ namespace Homework
 
         public static int SearchMinEllementIndex(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int min = array[0];
             int minIndex = 0;
             for (int i = 1; i < array.Length; i++)
@@ -58,6 +71,11 @@ namespace Homework
         //4. Найти индекс максимального элемента массива
         public static int SearchMaxEllementIndex(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int max = array[0];
             int maxIndex = 0;
             for (int i = 1; i < array.Length; i++)
@@ -75,6 +93,11 @@ namespace Homework
 
         public static int GetSummOfOddElements(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int result = 0;
             for (int i = 1; i < array.Length; i += 2)
             {
@@ -87,6 +110,11 @@ namespace Homework
 
         public static int[] Reverse(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             for (int i = 0; i < array.Length / 2; i++)
             {
                 VariablesHomework.Swap(ref array[i], ref array[array.Length - 1 - i]);
@@ -98,10 +126,15 @@ namespace Homework
 
         public static int CountOddElements(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int count = 0;
             for(int i=0;i<array.Length;i++)
             {
-                if(i%2==1)
+                if(Math.Abs(array[i]%2)==1 && array[i]!=0)
                 {
                     count++;
                 }
@@ -114,8 +147,12 @@ namespace Homework
 
         public static int[] ReversHalfsOfArray(int[]array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
 
-            for(int i=0;i<array.Length/2;i++)
+            for (int i=0;i<array.Length/2;i++)
             {
                 int tmp = array[i];
                 array[i] = array[array.Length / 2 + i + (array.Length % 2)];
@@ -128,6 +165,11 @@ namespace Homework
 
         public static int[] SortArrayAscending(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
+
             for (int i = 0; i < array.Length; i++) //запускаем цикл определения начала диапазона (смещаем индекс начального элемента)
             {
                 int indexOfMin = i;
@@ -150,6 +192,10 @@ namespace Homework
 
         public static int[] SortArrayDescending(int[] array)
         {
+            if (array.Length == 0)
+            {
+                throw new ArgumentException();
+            }
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)

@@ -12,6 +12,10 @@ namespace Homework
 
         public static int SearchMin(int[,] array)
         {
+            if(array.GetLength(0)==0 || array.GetLength(1)==0)
+            {
+                throw new ArgumentException();
+            }
             int min = array[0, 0];
             for (int i = 0; i < array.GetLength(0); i++)
             {
@@ -30,6 +34,10 @@ namespace Homework
 
         public static int SearchMax(int[,] array)
         {
+            if (array.GetLength(0) == 0 || array.GetLength(1) == 0)
+            {
+                throw new ArgumentException();
+            }
             int max = array[0, 0];
             for (int i = 0; i < array.GetLength(0); i++)
             {
@@ -48,6 +56,11 @@ namespace Homework
 
         public static int[] SearchMinIndex(int[,]array)
         {
+            if (array.GetLength(0) == 0 || array.GetLength(1) == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int min = array[0, 0];
             int[] minIndex = new int[] {0,0};
             for (int i = 0; i < array.GetLength(0); i++)
@@ -69,6 +82,11 @@ namespace Homework
 
         public static int[] SearchMaxIndex(int[,] array)
         {
+            if (array.GetLength(0) == 0 || array.GetLength(1) == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int max = array[0, 0];
             int[] maxIndex = new int[] { 0, 0 };
             for (int i = 0; i < array.GetLength(0); i++)

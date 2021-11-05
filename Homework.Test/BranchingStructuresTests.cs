@@ -47,8 +47,18 @@ namespace Homework.Test
 
         //3. Пользователь вводит 3 числа (A, B и С). Выведите их в консоль в порядке возрастания.
 
-        #region
+        #region SortNumbersAscendingTests
 
+        [TestCase(1,5,4, new int[] { 1,4,5 })]
+        [TestCase(-6,2,-3, new int[] { -6,-3,2 })]
+        [TestCase(0,12,-5, new int[] { -5,0,12 })]
+        [TestCase(0,0,0, new int[] { 0,0,0 })]
+        public void SortNumbersAscendingTests(int fNum, int sNum, int tNum, int[] expected)
+        {
+            int [] actual = BranchingStructures.SortNumbersAscending(fNum, sNum, tNum);
+
+            Assert.AreEqual(actual, expected);
+        }
 
         #endregion
 
