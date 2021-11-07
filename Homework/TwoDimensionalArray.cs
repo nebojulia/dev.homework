@@ -108,11 +108,16 @@ namespace Homework
 
         public static int CountBiggerNeighbor(int[,] array)
         {
+            if (array.GetLength(0) == 0 || array.GetLength(1) == 0)
+            {
+                throw new ArgumentException();
+            }
+
             int count = 0;
 
-            for (int i = 1; i < array.GetLength(0) - 1; i++)
+            for (int i = 0; i < array.GetLength(0) - 1; i++)
             {
-                for (int j = 1; j < array.GetLength(1) - 1; j++)
+                for (int j = 0; j < array.GetLength(1) - 1; j++)
                 {
 
                     if ((i == 0 || array[i, j] > array[i - 1, j])
@@ -131,7 +136,12 @@ namespace Homework
 
         public static int[,] TranspanentArray(int[,]array)
         {
-            if(array.GetLength(0)!=array.GetLength(1))
+            if (array.GetLength(0) == 0 || array.GetLength(1) == 0)
+            {
+                throw new ArgumentException();
+            }
+
+            if (array.GetLength(0)!=array.GetLength(1))
             {
                 throw new ArgumentException();
             }

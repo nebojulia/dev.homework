@@ -155,22 +155,48 @@ namespace Homework.Test
 
         #region CountBiggerNeighborTest
 
-       // public void CountBiggerNeighborTest(string type, int[] expected)
-       // {
-       //     int[]actual=
-       // }
-
+        [TestCase("positive", 1)]
+        [TestCase("negative", 1)]
+        [TestCase("zero", 0)]                                   
+        [TestCase("moreCols", 1)]
+        [TestCase("moreRows", 2)]
+        [TestCase("123", 1)]
+        public void CountBiggerNeighborTest(string type, int expected)
+        {
+            int actual = TwoDimensionalArray.CountBiggerNeighbor(GetTwoDimensionalArrayMock(type));
+        
+            Assert.AreEqual(expected, actual);
+        }
+        
+        [TestCase("lenghtLess")]
+        public void CountBiggerNeighborTest_WhenTwoDimensionalArrayCollOrRowIsEmpty_ThenThrowArgumentException(string type)
+        {
+            Assert.Throws<ArgumentException>(() => TwoDimensionalArray.CountBiggerNeighbor(GetTwoDimensionalArrayMock(type)));
+        }
         #endregion
 
         //6. Отразите массив относительно его главной диагонали
 
         #region TranspanentArrayTest
 
-        public void TranspanentArrayTest()
+        [TestCase("positive", "positive")]
+        [TestCase("negative", "negative")]
+        [TestCase("zero", "zero")]
+        [TestCase("1", "1")]
+        public void TranspanentArrayTest(string type, string expectedType)
         {
+            int[,] actual = TwoDimensionalArray.TranspanentArray(GetTwoDimensionalArrayMock(type));
+            int[,] expected = GetFlipMatrixMock(expectedType);
 
+            Assert.AreEqual(expected, actual);
         }
-
+        [TestCase("lenghtLess")]
+        [TestCase("moreCols")]         //как подтягивается?
+        [TestCase("moreRows")]         //как подтягивается?
+        public void TranspanentArrayTest_WhenTwoDimensionalArrayCollOrRowIsEmpty_ThenThrowArgumentException(string type)
+        {
+            Assert.Throws<ArgumentException>(() => TwoDimensionalArray.TranspanentArray(GetTwoDimensionalArrayMock(type)));
+        }
         #endregion
 
     }
