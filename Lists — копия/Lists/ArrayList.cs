@@ -120,13 +120,8 @@ namespace Lists
 
         #region
 
-        public void CutArrayEnd(ArrayList array)
+        public void CutArrayEnd()
         {
-            if(array.Length==0)
-            {
-                //я подумаю над этим
-            }
-
             CutArraySize();
             Length--;
         }
@@ -262,7 +257,11 @@ namespace Lists
         //13. изменение по индексу
 
         #region ChangeValueByIndex
-       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="index"></param>
         public void ChangeValueByIndex(int value, int index)
         {
             if (index < Length)
@@ -482,12 +481,7 @@ namespace Lists
 
         public void AddListInEnd(ArrayList array)
         {
-            if (Length+array.Length == _array.Length)
-            {
-                UpArraySize();
-            }
-
-            for (int i=0; i < array.Length; i++)
+            for(int i=0; i < array.Length; i++)
             {
                 _array[Length+i] = array[i];
             }
@@ -519,17 +513,12 @@ namespace Lists
 
         public void AddListByIndex(ArrayList arrayList, int index)
         {
-            if(index<0)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
             if(Length+arrayList.Length>_array.Length)
             {
                 UpArraySize();
             }
 
-            for(int i=index;i<=arrayList.Length+index-1;i++)
+            for(int i=index;i<=arrayList.Length+1;i++)
             {
                 ShiftToRight(index);
                 Length++;
