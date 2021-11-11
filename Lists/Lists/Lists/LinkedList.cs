@@ -104,25 +104,47 @@ namespace Lists
 
             //3. добавление значения по индексу
             #region
-                                                                    //пока далеко не готово
+                                                                    
             public void AddValueByIndex(int value, int index)
             {
-            Node addNode = new Node(value);
-                 _root = addNode;
-                for(int i=0;i<=index;i++)
+                if(index<0 || index>GetLength())
                 {
-                addNode = addNode.Next;
+                    throw new IndexOutOfRangeException();
                 }
-            _root.Next = addNode;
+                
+                Node addNode = new Node(value);
+                Node tmp = _root;
+
+                for(int i=0;i<index-1;i++)
+                {
+                    tmp=tmp.Next;
+                }
+                addNode.Next = tmp.Next;
+                tmp.Next = addNode;
             }
 
-            #endregion
+        #endregion
 
-            //4. удаление из конца одного элемента
+        //4. удаление из конца одного элемента
 
-            #region
+        #region
 
+        public void DeleteLast(int[]array)
+        {
+            Node tmp = _root;
+            int length = GetLength();
 
+            if(length==1)
+            {
+                _root = null;
+            }
+
+            for(int i=0; i<length-2; i++)  //если -1 он типа next'ом запрыгивает в последнюю ноду? 
+            {
+                tmp = tmp.Next;
+            }
+            tmp.Next = null;
+        }
 
             #endregion
 
@@ -130,21 +152,52 @@ namespace Lists
 
             #region
 
+        public void DeleteFromStart()
+        {
+            int length = GetLength();
+            
+            if (length == 1)
+            {
+                _root = null;
+            }
+            else
+            {
+                _root=_root.Next;
+            }
+        }
 
+        #endregion
 
-            #endregion
+        //6. удаление по индексу одного элемента
 
-            //6. удаление по индексу одного элемента
+        #region
+        public void DeleteByIndex(int index)
+        {
+            Node tmp = _root;
+            int length = GetLength();
 
-            #region
+            if(index>length ||index<0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            
+            if(index==0)
+            {
+                _root = _root.Next;
+            }
 
+            for(int i=0; i<index-1;i++)
+            {
+                tmp = tmp.Next;
+            }
+            tmp.Next = tmp.Next.Next;
+        }
 
+        #endregion
 
-            #endregion
+        //7. удаление из конца N элементов
 
-            //7. удаление из конца N элементов
-
-            #region
+        #region
 
         public void CutNumElementsFromEnd(int num)
         {
@@ -152,7 +205,7 @@ namespace Lists
 
             if(_root==null || num>length)
             {
-                throw new IndexOutOfRangeException();
+                throw new ArgumentOutOfRangeException();
             }
 
             if(length==1)
@@ -171,20 +224,57 @@ namespace Lists
             tmp.Next = null;
         }
 
-            #endregion
+        #endregion
 
-            //8. удаление из начала N элементов
+        //8. удаление из начала N элементов
 
-            #region
+        #region
 
+        public void DeleteNumElementsFromStart(int num)
+        {
+            int length = GetLength();
 
+            if(num<0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if(num>=length)
+            {
+                _root = null;
+            }
+            else
+            {
+                Node tmp = _root;
+                for (int i = 0; i < num - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
+                _root = tmp.Next;
+            }
+        }
             #endregion
 
             //9. удаление по индексу N элементов
 
             #region
 
+        public void DeleteNumElementsByIndex(int num, int index)   //в процессе
+        {
+            Node tmp = _root;
 
+            for(int i=0;i<index-1;i++)
+            {
+                tmp = tmp.Next;
+            }
+            Node save= tmp.Next;
+
+            for(int i=index;i<=num;i++)
+            {
+                tmp.Next = null;
+            }
+            //save.Next = 
+        }
 
             #endregion
 
@@ -192,7 +282,7 @@ namespace Lists
 
             #region
 
-
+        //GetLength();
 
             #endregion
 
@@ -292,7 +382,7 @@ namespace Lists
 
             #region
             //наверху
-            #endregion // в начале
+            #endregion 
 
             //24. добавление списка (вашего самодельного) в конец
 
