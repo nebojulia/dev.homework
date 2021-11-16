@@ -358,12 +358,12 @@ namespace Lists
 
             #region
 
-        public void GetMaxValue()
-        {
-            Node tmp = _root;
-
-            if(tmp.Next )
-        }
+       // public void GetMaxValue()
+       // {
+       //     Node tmp = _root;
+       //
+       //     if(tmp.Next )
+       // }
 
             #endregion
 
