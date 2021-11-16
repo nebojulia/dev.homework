@@ -17,6 +17,10 @@ namespace ConsoleList
             int[] array = new int[] { 1,2,3,4,5};
             LinkedList LL = new LinkedList(array);
 
+            //13
+            LL.ChangeIndexValue(3, -5);
+            LL.WriteToConsole();
+
 
             //1
             //LL.Add(0);
@@ -51,8 +55,8 @@ namespace ConsoleList
             //LL.WriteToConsole();
 
             //9
-            LL.DeleteNumElementsByIndex(2, 2);
-            LL.WriteToConsole();
+            //LL.DeleteNumElementsByIndex(3, 0);
+            //LL.WriteToConsole();
         }
     }
 }

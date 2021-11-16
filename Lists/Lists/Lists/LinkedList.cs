@@ -258,8 +258,51 @@ namespace Lists
             //9. удаление по индексу N элементов
 
             #region
-
+        
         public void DeleteNumElementsByIndex(int num, int index)   //в процессе
+        {
+            int length = GetLength();
+
+            if(index>length || num<0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+         // if(index==0 && num>=length)     //выдать пустой лист, если index=0 а num>=length
+         // {
+         //     _root.Next = null;
+         // }
+
+            Node tmp = _root;
+
+            for(int i=0;i<index-1;i++)
+            {
+                tmp = tmp.Next;
+            }
+
+            Node tmp2 = _root;
+            for(int i=0;i<index+num-1;i++)
+            {
+                tmp2 = tmp2.Next;
+            }
+
+            tmp.Next = tmp2.Next;
+        }
+
+        #endregion
+
+        //10. вернуть длину
+
+        #region
+
+        //GetLength();
+
+        #endregion
+
+        //11. доступ по индексу
+
+        #region
+
+        public void GetIndex(int index)
         {
             Node tmp = _root;
 
@@ -267,29 +310,7 @@ namespace Lists
             {
                 tmp = tmp.Next;
             }
-            Node save= tmp.Next;
-
-            for(int i=index;i<=num;i++)
-            {
-                tmp.Next = null;
-            }
-            //save.Next = 
         }
-
-            #endregion
-
-            //10. вернуть длину
-
-            #region
-
-        //GetLength();
-
-            #endregion
-
-            //11. доступ по индексу
-
-            #region
-
 
             #endregion
 
@@ -305,7 +326,23 @@ namespace Lists
 
             #region ChangeValueByIndex
 
+        public void ChangeIndexValue(int index,int value)
+        {
+           int length = GetLength();
 
+            if(index<0 || index>length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            Node tmp = _root;
+
+            for (int i = 0; i < index - 1; i++)
+            {
+                tmp = tmp.Next;
+            }
+            tmp.Next.Value = value;
+        }
 
             #endregion
 
@@ -321,6 +358,12 @@ namespace Lists
 
             #region
 
+        public void GetMaxValue()
+        {
+            Node tmp = _root;
+
+            if(tmp.Next )
+        }
 
             #endregion
 
