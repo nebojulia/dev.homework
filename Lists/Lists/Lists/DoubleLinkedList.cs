@@ -61,7 +61,22 @@ namespace Lists
             Console.WriteLine();
         }
 
-       
+       public void IsIndexLeft(int index)
+        {
+            Node crnt;
+            int numOfSteps;
+
+            if (index <= Length / 2)
+            {
+                crnt = _root;
+                numOfSteps = index;
+            }
+            else
+            {
+                crnt = _tail;
+                numOfSteps = Length - index;
+            }
+        }
 
 
         //1. добавление значения в конец
@@ -154,9 +169,9 @@ namespace Lists
 
         #region
 
-        public void DeleteLast(int[] array)
+        public void RemoveLast()
         {
-
+            RemoveByIndex(Length - 1);
         }
 
         #endregion
@@ -165,18 +180,23 @@ namespace Lists
 
         #region
 
-        public void DeleteFromStart()
+        public void RemoveFromStart()
         {
-
+            RemoveByIndex(0);
         }
 
         #endregion
 
-        //6. удаление по индексу одного элемента         ПРОВЕРИТЬ
+        //6. удаление по индексу одного элемента        
 
         #region
         public void RemoveByIndex(int index)
         {
+            if(index<0 || index>Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             bool isIndexLeft = index <= Length / 2;
             Node crnt;
             int numOfSteps;
@@ -229,7 +249,18 @@ namespace Lists
 
         public void CutNumElementsFromEnd(int num)
         {
-            
+            int length = Length;
+            if(num>Length)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                for(int i= length - num; i < length; i++)
+                {
+                    RemoveLast();
+                }
+            }
         }
 
         #endregion
@@ -238,9 +269,20 @@ namespace Lists
 
         #region
 
-        public void DeleteNumElementsFromStart(int num)
+        public void CutNumElementsFromStart(int num)
         {
-            
+            int length = Length;
+            if (num > Length)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                for (int i = 0; i < num; i++)
+                {
+                    RemoveFromStart();
+                }
+            }
         }
         #endregion
 
@@ -251,6 +293,17 @@ namespace Lists
         public void DeleteNumElementsByIndex(int num, int index)   //в процессе
         {
            
+           //if (num > Length)
+           //{
+           //    throw new ArgumentOutOfRangeException();
+           //}                                                          как я это сделала? удаляет каждую 2ю ноду
+           //else
+           //{
+           //    for (int i = index; i <= num; i++)
+           //    {
+           //        RemoveByIndex(i);
+           //    }
+           //}
         }
 
         #endregion
@@ -396,6 +449,12 @@ namespace Lists
 
         #endregion
 
+
+
+        public void GetNodeByIndex()
+        {
+
+        }
     }
 }
 
