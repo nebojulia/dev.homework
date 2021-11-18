@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lists
 {
-
     public class DoubleLinkedList
     {
         public int Length { get; private set; }
@@ -61,22 +60,21 @@ namespace Lists
             Console.WriteLine();
         }
 
-       public void IsIndexLeft(int index)
-        {
-            Node crnt;
-            int numOfSteps;
+        
 
-            if (index <= Length / 2)
-            {
-                crnt = _root;
-                numOfSteps = index;
-            }
-            else
-            {
-                crnt = _tail;
-                numOfSteps = Length - index;
-            }
-        }
+        //  public void IsIndexLeft(int index)
+        //   {
+        //       Node crnt;
+        //
+        //       if (index <= Length / 2)
+        //       {
+        //           crnt = _root; 
+        //       }
+        //       else
+        //       {
+        //           crnt = _tail;  
+        //       }
+        //   }
 
 
         //1. добавление значения в конец
@@ -304,6 +302,9 @@ namespace Lists
            //        RemoveByIndex(i);
            //    }
            //}
+
+
+
         }
 
         #endregion
@@ -320,10 +321,33 @@ namespace Lists
 
         #region
 
-        public void GetIndex(int index)
-        {
-            
-        }
+      //  public Node GetByIndex(int index)                        //  ???
+      //  {
+      //      int len = Length;
+      //      if (index >= len || index < 0)
+      //      {
+      //          throw new IndexOutOfRangeException();
+      //      }
+      //      else if (index < len / 2)
+      //      {
+      //          Node tmp = _root;
+      //          for (int i = 0; i < index; i++)
+      //          {
+      //              tmp = tmp.Next;
+      //          }
+      //          return tmp;
+      //      }
+      //      else
+      //      {
+      //          Node tmp = _tail;
+      //          for (int i = 0; i < len - index - 1; i++)
+      //          {
+      //              tmp = tmp.Previous;
+      //          }
+      //          return tmp;
+      //      }
+      //      return new Node();
+      //  }
 
         #endregion
 
@@ -362,7 +386,7 @@ namespace Lists
         {
 
         }
-        
+
         #endregion
 
         //16. поиск значения минимального элемента
@@ -449,12 +473,9 @@ namespace Lists
 
         #endregion
 
+       
 
 
-        public void GetNodeByIndex()
-        {
-
-        }
     }
 }
 

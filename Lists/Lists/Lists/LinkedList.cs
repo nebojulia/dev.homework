@@ -129,7 +129,7 @@ namespace Lists
 
         #region
 
-        public void DeleteLast(int[]array)
+        public void DeleteLast()
         {
             Node tmp = _root;
             int length = GetLength();
@@ -239,6 +239,11 @@ namespace Lists
                 throw new ArgumentOutOfRangeException();
             }
 
+            if(num==0)
+            {
+                return;
+            }
+
             if(num>=length)
             {
                 _root = null;
@@ -312,19 +317,32 @@ namespace Lists
             }
         }
 
-            #endregion
+        #endregion
 
-            //12. первый индекс по значению
+        //12. первый индекс по значению
 
-            #region
+        #region
 
+        public int GetFirstIndexByValue(int value)
+        {
+            Node tmp = _root;
 
+            for (int i = 0; tmp != null; i++)
+            {
+                if (tmp.Value == value)
+                {
+                    return i;
+                }
+                tmp = tmp.Next;
+            }
+            return -1;
+        }
 
-            #endregion
+        #endregion
 
-            //13. изменение по индексу
+        //13. изменение по индексу
 
-            #region ChangeValueByIndex
+        #region ChangeValueByIndex
 
         public void ChangeIndexValue(int index,int value)
         {
@@ -344,112 +362,350 @@ namespace Lists
             tmp.Next.Value = value;
         }
 
-            #endregion
+        #endregion
 
-            //14. реверс (123 -> 321)
+        //14. реверс (123 -> 321)
 
-            #region
-
-
-
-            #endregion
-
-            //15. поиск значения максимального элемента
-
-            #region
-
-       // public void GetMaxValue()
-       // {
-       //     Node tmp = _root;
-       //
-       //     if(tmp.Next )
-       // }
-
-            #endregion
-
-            //16. поиск значения минимального элемента
-
-            #region
+        #region
 
 
 
-            #endregion
+        #endregion
 
-            //17. поиск индекс максимального элемента
+        //15. поиск значения максимального элемента
 
-            #region
+        #region
+
+        public int GetMax()
+        {
+            if (_root != null)
+            {
+                int max = _root.Value;
+                Node tmp = _root;
+
+                while (tmp != null)
+                {
+                    if (tmp.Value > max)
+                    {
+                        max = tmp.Value;
+                    }
+                    tmp = tmp.Next;
+                }
+
+                return max;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+        }
+
+        #endregion
+
+        //16. поиск значения минимального элемента
+
+        #region
+
+        public int GetMin()
+        {
+            if (_root != null)
+            {
+                int min = _root.Value;
+                Node tmp = _root;
+
+                while (tmp != null)
+                {
+                    if (tmp.Value < min)
+                    {
+                        min = tmp.Value;
+                    }
+                    tmp = tmp.Next;
+                }
+
+                return min;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+        }
+
+        #endregion
+
+        //17. поиск индекс максимального элемента
+
+        #region
+
+        public int GetIndexOfMax()
+        {
+            if (_root != null)
+            {
+                int min = _root.Value;
+                int index = 0;
+                int counter = 0;
+                Node tmp = _root;
+
+                while (tmp != null)
+                {
+                    if (tmp.Value > min)
+                    {
+                        min = tmp.Value;
+                        index = counter;
+                    }
+                    tmp = tmp.Next;
+                    counter++;
+                }
+
+                return index;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        #endregion
+
+        //18. поиск индекс минимального элемента
+
+        #region
+
+        public int GetIndexOfMin()
+        {
+            if (_root != null)
+            {
+                int max = _root.Value;
+                int index = 0;
+                int counter = 0;
+                Node tmp = _root;
+
+                while (tmp != null)
+                {
+                    if (tmp.Value < max)
+                    {
+                        max = tmp.Value;
+                        index = counter;
+                    }
+                    tmp = tmp.Next;
+                    counter++;
+                }
+
+                return index;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
+
+        #endregion
+
+        //19. сортировка по возрастанию
+
+        #region
 
 
-            #endregion
 
-            //18. поиск индекс минимального элемента
+        #endregion
 
-            #region
+        //20. сортировка по убыванию
 
-
-
-            #endregion
-
-            //19. сортировка по возрастанию
-
-            #region
+        #region
 
 
+        #endregion
 
-            #endregion
+        //21. удаление по значению первого (?вернуть индекс)
 
-            //20. сортировка по убыванию
+        #region
 
-            #region
+        public int DeleteFirstEqual(int value)
+        {
+            int index = 0;
 
+            if (_root != null)
+            {
+                Node tmp = _root;
+                while (tmp != null)
+                {
+                    if (tmp.Value == value)
+                    {
+                        return index;
+                    }
+                    index++;
+                    tmp = tmp.Next;
+                }
+            }
+            return -1;
+        }
 
-            #endregion
+        #endregion
 
-            //21. удаление по значению первого (?вернуть индекс)
+        //22. удаление по значению всех (?вернуть кол-во)
 
-            #region
+        #region
 
+        public int DeleteAllEquals(int value)
+        {
+            int count = 0;
 
+            if (_root != null)
+            {
+                Node tmp = _root;
+                while (tmp != null)
+                {
+                    while (tmp.Value == value)
+                    {
+                        if (tmp.Next == null)
+                        {
+                            _root = null;
+                            count++;
+                            return count;
+                        }
+                        tmp = tmp.Next;
+                        count++;
+                    }
 
-            #endregion
+                    if (tmp.Next != null)
+                    {
+                        if (tmp.Next.Value == value || tmp.Value == value)
+                        {
+                            count++;
+                            if (tmp.Next.Next != null)
+                            {
+                                tmp.Next = tmp.Next.Next;
+                            }
+                            else
+                            {
+                                tmp.Next = null;
+                            }
+                        }
+                    }
+                    tmp = tmp.Next;
+                }
+            }
+            return count;
+        }
 
-            //22. удаление по значению всех (?вернуть кол-во)
+        #endregion
 
-            #region
+        //23. 3 конструктора (пустой, на основе одного элемента, на основе массива)
 
+        #region
+        //наверху
+        #endregion
 
+        //24. добавление списка (вашего самодельного) в конец
 
-            #endregion
+        #region
+        public void AddLinkedList(LinkedList list)
+        {
+            if (_root != null)
+            {
+                Node tmp = _root;
+                while (tmp.Next != null)
+                {
+                    tmp = tmp.Next;
+                }
+                tmp.Next = list._root;
+            }
+            else
+            {
+                _root = list._root;
+            }
+        }
 
-            //23. 3 конструктора (пустой, на основе одного элемента, на основе массива)
+        #endregion
 
-            #region
-            //наверху
-            #endregion 
+        //25. добавление списка в начало
 
-            //24. добавление списка (вашего самодельного) в конец
+        #region
+        public void AddFirstLinkedList(LinkedList list)
+        {
+            if (list._root != null)
+            {
+                Node tmpList = list._root;
+                while (tmpList.Next != null)
+                {
+                    tmpList = tmpList.Next;
+                }
+                tmpList.Next = _root;
+                _root = list._root;
+            }
+        }
 
-            #region
+        #endregion
 
+        //26. добавление списка по индексу
 
+        #region
+        public void AddLinkedListByIndex(LinkedList list, int index)
+        {
+            int len = GetLength();
 
-            #endregion
+            if (index > len - 1)
+            {
+                throw new IndexOutOfRangeException();
+            }
 
-            //25. добавление списка в начало
+            if (_root == null)
+            {
+                _root = list._root;
+            }
+            else if (list._root != null && _root != null)
+            {
+                Node startList = list._root;
+                Node endList = list._root;
+                
+                while (endList.Next != null)
+                {
+                    endList = endList.Next;
+                }
+                Node tmp = _root;
 
-            #region
+                for (int i = 0; i < index - 1; i++)
+                {
+                    tmp = tmp.Next;
+                }
 
+                Node tmpContinue = tmp.Next;
+                tmp.Next = startList;
+                endList.Next = tmpContinue;
+            }
+        }
 
+        #endregion
 
-            #endregion
+        public override bool Equals(object obj)
+        {
+            LinkedList linkedList = (LinkedList)obj;
 
-            //26. добавление списка по индексу
+            Node tmpRoot = _root;
+            Node tmp = linkedList._root;
 
-            #region
+            if (tmpRoot == null && tmp == null)
+            {
+                return true;
+            }
 
+            while (tmpRoot != null || tmp != null)
+            {
+                if (tmpRoot.Value != tmp.Value)
+                {
+                    return false;
+                }
+                if ((tmpRoot.Next == null && tmp.Next != null)
+                    || (tmpRoot.Next != null && tmp.Next == null))
+                {
+                    return false;
+                }
 
-
-            #endregion
-   
+                tmpRoot = tmpRoot.Next;
+                tmp = tmp.Next;
+            }
+            return true;
+        }
     }
 }

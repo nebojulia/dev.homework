@@ -41,9 +41,12 @@ namespace ConsoleList
             //LL.RemoveByIndex(-10);
             //LL.WriteToConsole();
 
+
+            //LL.DeleteNumElementsByIndex(5,2);
+            //LL.WriteToConsole();
+
             
-            LL.DeleteNumElementsByIndex(5,2);
-            LL.WriteToConsole();
+
         }
     }
 }

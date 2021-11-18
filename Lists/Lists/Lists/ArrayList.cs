@@ -83,7 +83,7 @@ namespace Lists
 
         #region
         
-        public void AddToBeggining(int value)
+        public void AddToStart(int value)
         {
             if (Length == _array.Length)
             {
@@ -101,6 +101,11 @@ namespace Lists
         
         public void AddByIndex(int value, int index)
         {
+            if (index >= Length || index < 1)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             if (Length == _array.Length)
             {
                 UpArraySize();
@@ -120,15 +125,14 @@ namespace Lists
 
         #region
 
-        public void CutArrayEnd(ArrayList array)
+        public void DeleteLastElement()
         {
-            if(array.Length==0)
+            if (Length > 0)
             {
-                //я подумаю над этим
+                Length--;
+                CutArraySize();
             }
-
-            CutArraySize();
-            Length--;
+            
         }
 
         #endregion
@@ -137,7 +141,7 @@ namespace Lists
 
         #region
 
-        public void CutArrayStart()
+        public void DeleteFirstElement()
         {
             CutArraySize();
             ShiftToLeft();
@@ -150,8 +154,13 @@ namespace Lists
 
         #region
 
-        public void CutByIndex(int index)
+        public void DeleteByIndex(int index)
         {
+            if (index >= Length || index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             CutArraySize();
 
             for (int i = index; i < Length; i++)
@@ -167,8 +176,13 @@ namespace Lists
 
         #region
 
-        public void CutArrayEndByNumElement(int count)
+        public void DeleteLastElements(int count)
         {
+            if (count > Length)
+            {
+                throw new ArgumentException();
+            }
+
             CutArraySize();
 
             Length -= count;
@@ -180,11 +194,16 @@ namespace Lists
 
         #region
 
-        public void CutArrayStartByNumElement(int count)
+        public void DeleteElementsFromStart(int count)
         {
-            for(int i=0; i<count; i++)
+            if (count > Length)
             {
-                CutArrayStart();
+                throw new ArgumentException();
+            }
+
+            for (int i=0; i<count; i++)
+            {
+                DeleteFirstElement();
             }
         }
         #endregion
@@ -193,14 +212,20 @@ namespace Lists
 
         #region
 
-        public void CutSeveralElementsFromArrayByIndex(int count, int index)
+        public void DeleteElementsByIndex(int count, int index)
         {
+            if (index + 1 + count > Length)
+            {
+                throw new ArgumentException();
+            }
+
             CutArraySize();
+
             for(int i=index; i<index+count; i++)
             {
                 ShiftToLeft(index);
             }
-            Length -= count;
+            
         }
 
         #endregion
@@ -287,7 +312,7 @@ namespace Lists
 
         #region
 
-        public void ReverseArrayList()
+        public void Reverse()
         {
             for(int i=0;i<Length/2;i++)
             {
@@ -301,10 +326,15 @@ namespace Lists
 
         //15. поиск значения максимального элемента
 
-        #region
+        #region GetMaxElement
 
-        public int SearchMaxElement()
+        public int GetMaxElement()
         {
+            if (Length == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             int max = _array[0];
 
             for (int i = 1; i < _array.Length; i++)
@@ -316,17 +346,22 @@ namespace Lists
             }
             return max;
         }
-            #endregion
+        #endregion
 
-            //16. поиск значения минимального элемента
+        //16. поиск значения минимального элемента
 
-            #region
+        #region GetMinElement
 
-        public int SearchMinElement()
+        public int GetMinElement()
         {
+            if (Length == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             int min = _array[0];
 
-            for(int i=1;i<_array.Length;i++)
+            for(int i=1;i<Length;i++)
             {
                 if (_array[i] < min)
                 {
@@ -340,9 +375,14 @@ namespace Lists
 
         //17. поиск индекс максимального элемента
 
-        #region
-        public int SearchIndexOfMax()
+        #region GetIndexOfMax
+        public int GetIndexOfMax()
         {
+            if (Length == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             int max = _array[0];
             int maxIndex = 0;
 
@@ -361,14 +401,19 @@ namespace Lists
 
         //18. поиск индекс минимального элемента
 
-        #region
+        #region GetIndexOfMin
 
-        public int SearchIndexOfMin()
+        public int GetIndexOfMin()
         {
+            if (Length == 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             int min = _array[0];
             int minIndex = 0;
 
-            for (int i = 1; i < _array.Length; i++)
+            for (int i = 1; i < Length; i++)
             {
                 if (_array[i] < min)
                 {
@@ -383,14 +428,14 @@ namespace Lists
 
         //19. сортировка по возрастанию
 
-        #region
+        #region SortAscending
 
         public void SortAscending()  
         {
-            for(int i=0;i<_array.Length;i++)
+            for(int i=0;i<Length;i++)
             {
                 int indexOfMin = i;
-                for(int j=i+1;j<_array.Length;j++)
+                for(int j=i+1;j<Length;j++)
                 {
                     if(_array[indexOfMin]>_array[j])
                     {
@@ -407,13 +452,13 @@ namespace Lists
 
         //20. сортировка по убыванию
 
-        #region
+        #region SortDescending
         public void SortDescending() 
         {
-            for (int i = 0; i < _array.Length; i++)
+            for (int i = 0; i < Length; i++)
             {
                 int indexOfMax = i;
-                for (int j = i + 1; j < _array.Length; j++)
+                for (int j = i + 1; j < Length; j++)
                 {
                     if (_array[indexOfMax] < _array[j])
                     {
@@ -436,11 +481,9 @@ namespace Lists
         {
             for(int i=0;i<Length;i++)
             {
-                int index=0;
-
                 if (_array[i]==value)
                 {
-                    index = i;
+                    int index = i;
                     ShiftToLeft(index);
                     return index;
                 }
@@ -452,7 +495,7 @@ namespace Lists
 
         //22. удаление по значению всех (?вернуть кол-во)
 
-        #region
+        #region DeleteAllMatches
 
         public int DeleteAllMatches(int value)
         {
@@ -465,6 +508,7 @@ namespace Lists
                     count++;
                 }
             }
+            Length -= count;
             return count;
         }
 
@@ -473,14 +517,14 @@ namespace Lists
         //23. 3 конструктора (пустой, на основе одного элемента, на основе массива)
 
         #region
-
-        #endregion // в начале
+        // в начале
+        #endregion
 
         //24. добавление списка (вашего самодельного) в конец
 
-        #region
+        #region AddListToEnd
 
-        public void AddListInEnd(ArrayList array)
+        public void AddListToEnd(ArrayList array)
         {
             if (Length+array.Length == _array.Length)
             {
@@ -499,9 +543,9 @@ namespace Lists
 
         //25. добавление списка в начало
 
-        #region
-                                                                  
-        public void AddListInStart(ArrayList array)
+        #region AddListToStart
+
+        public void AddListToStart(ArrayList array)
         {
             for(int i=0; i < array.Length; i++)
             {
@@ -565,10 +609,11 @@ namespace Lists
 
         private void CutArraySize()
         {
-            if(Length<=(_array.Length/2))
+            if ((int)(Length * 0.7) > _minArrayLength && Length <= (_array.Length / 2))
             {
                 int[] tmpArray = new int[(int)(Length * 0.7)];
-                for (int i = 0; i < Length; i++)
+
+                for (int i = 0; i < _array.Length; i++)
                 {
                     tmpArray[i] = _array[i];
                 }
@@ -595,6 +640,26 @@ namespace Lists
                 _array[i] = _array[i+1];
                 //_array[i+1] = tmp;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            ArrayList arrayList = (ArrayList)obj;
+
+            if (Length != arrayList.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Length; i++)
+            {
+                if (arrayList._array[i] != _array[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
